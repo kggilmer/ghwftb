@@ -69,17 +69,18 @@ jobs:
 
   combine-docs:
     needs: api-doc-gen-parallel
+    runs-on: ubuntu-latest
     steps:
-      -name: Combine
-       run: |
-        git fetch
-        for segment in {a..z}
-        do
-          SEGMENT_BRANCH="api-docs-segment-$segment"
-          branch_exists=$(git ls-remote --heads git@github.com:user/repo.git $SEGMENT_BRANCH | wc -l)
+      - name: Combine
+        run: |
+          git fetch
+          for segment in {a..z}
+          do
+            SEGMENT_BRANCH="api-docs-segment-$segment"
+            branch_exists=$(git ls-remote --heads git@github.com:user/repo.git $SEGMENT_BRANCH | wc -l)
 
-          if [ branch_exists == 1 ]; then
-            echo "Merging $SEGMENT_BRANCH"
-          else
-            echo "No work for $SEGMENT_BRANCH"
-        done
+            if [ branch_exists == 1 ]; then
+              echo "Merging $SEGMENT_BRANCH"
+            else
+              echo "No work for $SEGMENT_BRANCH"
+          done
