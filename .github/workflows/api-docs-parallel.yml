@@ -89,9 +89,7 @@ jobs:
           for segment in {a..z}
           do
             SEGMENT_BRANCH="api-docs-segment-$segment"
-            branch_exists=$(git ls-remote --heads git@github.com:user/repo.git $SEGMENT_BRANCH | wc -l)
-
-            if [ branch_exists == 1 ]; then
+            if [ `git branch | egrep "^[[:space:]]+${$SEGMENT_BRANCH}$"` ]
               echo "Merging $SEGMENT_BRANCH"
             else
               echo "No work for $SEGMENT_BRANCH"
