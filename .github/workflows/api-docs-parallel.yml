@@ -86,10 +86,11 @@ jobs:
           ref: ${{ github.event.inputs.tag }}
       - name: Combine
         run: |
+          set -x
           for segment in {a..z}
           do
             SEGMENT_BRANCH="api-docs-segment-$segment"
-            if [ `git branch | egrep "^[[:space:]]+${$SEGMENT_BRANCH}$"` ]
+            if [ `git branch | egrep "^[[:space:]]+${$SEGMENT_BRANCH}$"` ]; then
               echo "Merging $SEGMENT_BRANCH"
             else
               echo "No work for $SEGMENT_BRANCH"
