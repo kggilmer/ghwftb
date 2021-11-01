@@ -95,4 +95,5 @@ jobs:
               echo "Merging $SEGMENT_BRANCH"
             else
               echo "No work for $SEGMENT_BRANCH"
+            fi
           done
