@@ -48,8 +48,8 @@ jobs:
               echo ./gradlew --no-parallel -PdokkaOutSubDir=$SERVICE_NAME dokkaHtmlMultiModule # generate docs for SDK
               echo git clean -dfx services # delete src for generated SDK
 
-              mkdir -p build/dokka/build/dokka/htmlMultiModule/$SERVICE_NAME
-              echo $SERVICE_NAME > build/dokka/build/dokka/htmlMultiModule/$SERVICE_NAME/$SERVICE_NAME.txt
+              mkdir -p build/dokka/htmlMultiModule/$SERVICE_NAME
+              echo $SERVICE_NAME > build/dokka/htmlMultiModule/$SERVICE_NAME/$SERVICE_NAME.txt
             else
               echo "Ignoring excluded service $SERVICE_NAME"
             fi
@@ -80,9 +80,12 @@ jobs:
     needs: api-doc-gen-parallel
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.tag }}
       - name: Combine
         run: |
-          git fetch
           for segment in {a..z}
           do
             SEGMENT_BRANCH="api-docs-segment-$segment"
