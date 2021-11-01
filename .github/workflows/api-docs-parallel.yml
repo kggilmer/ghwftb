@@ -56,11 +56,13 @@ jobs:
           done
       - name: Create Branch
         run: |
+          set -x
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git checkout --orphan api-docs-segment-${{ matrix.service-prefix }}
           git rm -rf .
           git commit --allow-empty -m "empty"
+          git push origin api-docs-segment-${{ matrix.service-prefix }}
       - name: Stage in branch
         uses: peaceiris/actions-gh-pages@v3.7.3
         with:
