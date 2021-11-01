@@ -66,6 +66,7 @@ jobs:
           user_email: nobody@amazonaws.com
           commit_message: Update docs
           disable_nojekyll: true
+          force_orphan: true
 
   combine-docs:
     needs: api-doc-gen-parallel
