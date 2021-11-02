@@ -68,7 +68,7 @@ jobs:
           git push origin api-docs-segment-${{ matrix.service-prefix }}
       - name: Stage in branch
         uses: peaceiris/actions-gh-pages@v3.7.3
-        if: ${{ steps.gen-docs.outputs.docs-generated == "true" }}
+        if: ${{ steps.gen-docs.outputs.docs-generated == 'true' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: api-docs-segment-${{ matrix.service-prefix }}
