@@ -87,12 +87,15 @@ jobs:
       - name: Combine
         run: |
           set -x
+          git branch
           for segment in {a..z}
           do
             SEGMENT_BRANCH="api-docs-segment-$segment"
-            if [ `git branch | egrep "^[[:space:]]+${$SEGMENT_BRANCH}$"` ]; then
-              echo "Merging $SEGMENT_BRANCH"
+            existed_in_remote=$(git ls-remote --heads origin ${SEGMENT_BRANCH})
+
+            if [[ -z ${existed_in_remote} ]]; then
+              echo "No work for $SEGMENT_BRANCH"              
             else
-              echo "No work for $SEGMENT_BRANCH"
+              echo "Merging $SEGMENT_BRANCH"
             fi
           done
