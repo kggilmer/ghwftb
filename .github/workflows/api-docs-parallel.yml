@@ -109,7 +109,7 @@ jobs:
               git checkout origin/api-docs
               git switch -c api-docs
               git rebase origin/$SEGMENT_BRANCH
-              git push origin/api-docs
+              git push origin api-docs
 
             fi
           done
