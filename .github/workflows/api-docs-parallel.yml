@@ -107,7 +107,7 @@ jobs:
               git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
               git fetch
               git checkout origin/api-docs
-              git rebase $SEGMENT_BRANCH
+              git rebase origin/$SEGMENT_BRANCH
               git push origin api-docs
 
             fi
