@@ -98,8 +98,15 @@ jobs:
             existed_in_remote=$(git ls-remote --heads origin ${SEGMENT_BRANCH})
 
             if [[ -z ${existed_in_remote} ]]; then
-              echo "No work for $SEGMENT_BRANCH"              
+              echo "No work for $SEGMENT_BRANCH"                            
             else
               echo "Merging $SEGMENT_BRANCH"
+              git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+              git config --local user.name "github-actions[bot]"
+
+              git checkout api-docs
+              git merge $SEGMENT_BRANCH
+              git push origin api-docs
+
             fi
           done
