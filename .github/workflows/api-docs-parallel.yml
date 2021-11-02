@@ -108,7 +108,7 @@ jobs:
               git fetch
               git checkout origin/api-docs
               git rebase origin/$SEGMENT_BRANCH
-              git push origin api-docs
+              git push origin/api-docs
 
             fi
           done
